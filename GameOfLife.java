@@ -11,8 +11,8 @@ public class GameOfLife {
 		String fileName = args[0];
 		//// Uncomment the test that you want to execute, and re-compile.
 		//// (Run one test at a time).
-		// test1(fileName);
-		//// test2(fileName);
+		//test1(fileName);
+		 test2(fileName);
 		//// test3(fileName, 3);
 		//// play(fileName);
 	}
@@ -27,8 +27,14 @@ public class GameOfLife {
 	// the count and cellValue functions.
 	private static void test2(String fileName) {
 		int[][] board = read(fileName);
-		//// Write here code that tests that the count and cellValue functions
-		//// are working properly, and returning the correct values.
+		int[][] step2 = new int [ board.length][board[0].length];
+		for( int i = 1; i < board.length-1; i++){
+			for( int j = 1; j < board[0].length-1; j++){
+				step2[i][j] = cellValue(board, i, j);
+			}
+
+		}
+		print(step2);
 	}
 		
 	// Reads the data file, plays the game for Ngen generations, 
@@ -89,13 +95,14 @@ public class GameOfLife {
 	// Uses the cellValue(board,i,j) function to compute the value of each 
 	// cell in the new board. Returns the new board.
 	public static int[][] evolve(int[][] board) {
-		for( int i = 0; i < board.length; i++){
-			for( int j = 0; j < board[0].length; j++){
-				board[i][j] = cellValue(board, i, j);
+		int [][] nextboard= new int[board.length] [board[0].length];
+		for( int i = 1; i < board.length-1; i++){
+			for( int j = 1; j < board[0].length-1; j++){
+				nextboard[i][j] = cellValue(board, i, j);
 			}
 
 		}
-		return board;
+		return nextboard;
 	}
 
 	// Returns the value that cell (i,j) should have in the next generation.
